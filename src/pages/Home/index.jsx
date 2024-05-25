@@ -1,7 +1,8 @@
-import {FiPlus} from 'react-icons/fi'
+import { FiPlus, FiSearch } from "react-icons/fi"
 
 import { Container, Brand, Menu, Search, Content, NewNote } from "./styles"
 import { Header } from "../../components/Header"
+import { Input } from "../../components/Input"
 import { ButtonText } from "../../components/ButtonText"
 
 export function Home() {
@@ -22,10 +23,12 @@ export function Home() {
           <ButtonText title="NodeJS" />
         </li>
       </Menu>
-      <Search></Search>
+      <Search>
+        <Input icon={FiSearch} placeholder="Pesquise pelo título" />
+      </Search>
       <Content></Content>
       <NewNote>
-        <FiPlus/>
+        <FiPlus />
         Criar nota
       </NewNote>
     </Container>
