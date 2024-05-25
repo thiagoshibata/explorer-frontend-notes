@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+
 import { Container } from "./styles"
 
-export function Tag({ title }) {
+export function Tag({ title, ...rest }) {
   return <Container>{title}</Container>
 }
