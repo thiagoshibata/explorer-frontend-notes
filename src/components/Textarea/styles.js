@@ -9,7 +9,7 @@ export const Container = styled.textarea`
   border: none;
   resize: none;
 
-  margin-bottom: 8px;
+  margin: 8px 0;
   border-radius: 10px;
   padding: 16px;
 
