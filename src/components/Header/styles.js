@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export const Container = styled.header`
   grid-area: header;
@@ -16,9 +17,10 @@ export const Container = styled.header`
   padding: 0 80px;
 `
 
-export const Profile = styled.div`
+export const Profile = styled(Link)`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   > img {
     width: 56px;
