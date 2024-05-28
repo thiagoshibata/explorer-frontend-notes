@@ -2,6 +2,7 @@ import { Container, Form } from "./styles"
 
 import { Header } from "../../components/Header"
 import { Input } from "../../components/Input"
+import { Button } from "../../components/Button"
 import { Textarea } from "../../components/Textarea"
 import { Section } from "../../components/Section"
 import { NoteItem } from "../../components/NoteItem"
@@ -22,6 +23,13 @@ export function New() {
             <NoteItem value="https://rocketseat.com.br" />
             <NoteItem placeholder="Novo link" isNew />
           </Section>
+          <Section title="Marcadores">
+            <div className="tags">
+              <NoteItem value="react" />
+              <NoteItem placeholder="Nova tag" isNew />
+            </div>
+          </Section>
+          <Button title="Salvar" />
         </Form>
       </main>
     </Container>
