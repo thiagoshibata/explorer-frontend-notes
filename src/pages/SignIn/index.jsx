@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Container, Form, Background } from "./styles"
 import { FiMail, FiLock } from "react-icons/fi"
 import { Link } from "react-router-dom"
@@ -8,9 +9,14 @@ import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
 
 export function SignIn() {
-  const data = useAuth()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  console.log("Meu contexto: ", data)
+  const { signIn } = useAuth()
+
+  function handleSignIn() {
+    signIn({ email, password })
+  }
 
   return (
     <Container>
@@ -18,9 +24,19 @@ export function SignIn() {
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis.</p>
         <h2>Faça seu login</h2>
-        <Input icon={FiMail} type="text" placeholder="E-mail" />
-        <Input icon={FiLock} type="password" placeholder="Senha" />
-        <Button title="Entrar" />
+        <Input
+          icon={FiMail}
+          type="text"
+          placeholder="E-mail"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          icon={FiLock}
+          type="password"
+          placeholder="Senha"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button title="Entrar" onClick={handleSignIn} />
         <Link to="/register">Criar conta</Link>
       </Form>
       <Background />
