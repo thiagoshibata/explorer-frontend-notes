@@ -7,6 +7,7 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
 
+  //função para autenticar e salvar os dados de usuário e token no local Storage.
   async function signIn({ email, password }) {
     try {
       const response = await api.post("/sessions", { email, password })
@@ -27,6 +28,13 @@ function AuthProvider({ children }) {
       }
     }
   }
+
+  function signOut() {
+    localStorage.removeItem("@rocketnotes:token")
+    localStorage.removeItem("@rocketnotes:user")
+    setData({})
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@rocketnotes:token")
     const user = localStorage.getItem("@rocketnotes:user")
@@ -39,7 +47,7 @@ function AuthProvider({ children }) {
     }
   }, [])
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
       {children}
     </AuthContext.Provider>
   )
