@@ -13,10 +13,17 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data
 
+      const userData = {
+        name: user.name,
+        email: user.email,
+        id: user.id,
+      }
+
       localStorage.setItem("@rocketnotes:token", token)
-      localStorage.setItem("@rocketnotes:user", JSON.stringify(user))
+      localStorage.setItem("@rocketnotes:user", JSON.stringify(userData))
       //armazenando os dados do token no header da aplicação.
-      api.defaults.headers.authorization = `Bearer ${token}`
+      // api.defaults.headers.authorization = `Bearer ${token}` || desatualizado.
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
 
       //armazenando dados no estado da aplicação
       setData({ user, token })
@@ -28,7 +35,23 @@ function AuthProvider({ children }) {
       }
     }
   }
+  async function updateProfile({ user }) {
+    try {
+      await api.put("/users", user)
 
+      localStorage.setItem("@rocketnotes:user", JSON.stringify(user))
+
+      setData({ user, token: data.token })
+      alert("Perfil atualizado")
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert("Não foi possivel atualizar os dados")
+      }
+    }
+  }
+  
   function signOut() {
     localStorage.removeItem("@rocketnotes:token")
     localStorage.removeItem("@rocketnotes:user")
@@ -39,7 +62,7 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem("@rocketnotes:token")
     const user = localStorage.getItem("@rocketnotes:user")
     if (token && user) {
-      api.defaults.headers.authorization = `Bearer ${token}`
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
       setData({
         token,
         user: JSON.parse(user),
@@ -47,7 +70,9 @@ function AuthProvider({ children }) {
     }
   }, [])
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, updateProfile, user: data.user }}
+    >
       {children}
     </AuthContext.Provider>
   )
