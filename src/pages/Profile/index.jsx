@@ -33,6 +33,7 @@ export function Profile() {
       password: passwordNew,
       old_password: passwordOld,
     }
+    //mesclando os dados de usuário e sobrescrevendo com os dados novos.
     const userUpdated = Object.assign(user, updated)
     try {
       await updateProfile({ user: userUpdated, avatarFile })
