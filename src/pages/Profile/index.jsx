@@ -10,6 +10,7 @@ import { api } from "../../services/api"
 
 import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
+
 import avatarPlaceHolder from "../../assets/avatar_placeholder.svg"
 
 export function Profile() {
@@ -23,6 +24,7 @@ export function Profile() {
   const avatarUrl = user.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
     : avatarPlaceHolder
+    
   const [avatar, setAvatar] = useState(avatarUrl)
   const [avatarFile, setAvatarFile] = useState(null)
 
