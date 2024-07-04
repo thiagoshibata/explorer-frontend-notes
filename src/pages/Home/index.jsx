@@ -14,14 +14,11 @@ import { ButtonText } from "../../components/ButtonText"
 
 export function Home() {
   const navigate = useNavigate()
-
   //search
   const [search, setSearch] = useState("")
-
   //-- tags
   const [tags, setTags] = useState([])
   const [tagsSelected, setTagsSelected] = useState([])
-
   //--notes
   const [notes, setNotes] = useState([])
 
@@ -39,7 +36,6 @@ export function Home() {
   }
 
   function handleDetails(id) {
-    console.log("navigate")
     navigate(`/details/${id}`)
   }
 
